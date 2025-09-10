@@ -1,0 +1,17 @@
+
+# consumer_key=ck_417c5972d2dd7f5e972f680410949e1993b32eaf
+# consumer_secret=cs_0ac90608698e9033d62085329e68f68ba8aa920e
+# ?consumer_key=ck_417c5972d2dd7f5e972f680410949e1993b32eaf&consumer_secret=cs_0ac90608698e9033d62085329e68f68ba8aa920e
+# base64 encoded key Y2tfNDE3YzU5NzJkMmRkN2Y1ZTk3MmY2ODA0MTA5NDllMTk5M2IzMmVhZjpjc18wYWM5MDYwODY5OGU5MDMzZDYyMDg1MzI5ZTY4ZjY4YmE4YWE5MjBl
+
+
+GET https://localhost/wp-json/wc/v3/products
+Content-Type: application/json
+Authorization: Basic Y2tfNDE3YzU5NzJkMmRkN2Y1ZTk3MmY2ODA0MTA5NDllMTk5M2IzMmVhZjpjc18wYWM5MDYwODY5OGU5MDMzZDYyMDg1MzI5ZTY4ZjY4YmE4YWE5MjBl
+
+### 
+
+GET https://localhost/wp-json/wc/v3/products?consumer_key=ck_417c5972d2dd7f5e972f680410949e1993b32eaf&consumer_secret=cs_0ac90608698e9033d62085329e68f68ba8aa920e
+
+### 
+

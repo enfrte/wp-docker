@@ -1,0 +1,33 @@
+services:
+
+  wordpress:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "443:443" # maps to https://localhost/ (SSL enabled - requires self signed certs. Generated in Dockerfile) Note: You need to change edit wp Settings > General > WordPress Address (URL) and Site Address (URL) to use https://localhost/ or edit db table 'wp_options' siteurl and home options to use https://localhost
+      #- "80:80" # maps to http://localhost/
+    environment: 
+      WORDPRESS_DB_NAME: exampledb # DB environment variables for WordPress
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_HOST: db 
+    volumes:
+      - ./html:/var/www/html # Mounts local 'html' folder
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: exampledb # DB environment variables for MySQL created by wordpress during installation
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    ports:
+      - "3306:3306" # Expose MySQL to host for DBeaver
+    volumes:
+      - db:/var/lib/mysql
+
+volumes: # Volumes are for persisting data. 
+  db: # Named volume for MySQL data
