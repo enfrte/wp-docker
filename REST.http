@@ -4,14 +4,73 @@
 # ?consumer_key=ck_417c5972d2dd7f5e972f680410949e1993b32eaf&consumer_secret=cs_0ac90608698e9033d62085329e68f68ba8aa920e
 # base64 encoded key Y2tfNDE3YzU5NzJkMmRkN2Y1ZTk3MmY2ODA0MTA5NDllMTk5M2IzMmVhZjpjc18wYWM5MDYwODY5OGU5MDMzZDYyMDg1MzI5ZTY4ZjY4YmE4YWE5MjBl
 
+### Get all products
 
 GET https://localhost/wp-json/wc/v3/products
 Content-Type: application/json
 Authorization: Basic Y2tfNDE3YzU5NzJkMmRkN2Y1ZTk3MmY2ODA0MTA5NDllMTk5M2IzMmVhZjpjc18wYWM5MDYwODY5OGU5MDMzZDYyMDg1MzI5ZTY4ZjY4YmE4YWE5MjBl
 
-### 
+### Get all products with query parameters
 
 GET https://localhost/wp-json/wc/v3/products?consumer_key=ck_417c5972d2dd7f5e972f680410949e1993b32eaf&consumer_secret=cs_0ac90608698e9033d62085329e68f68ba8aa920e
 
-### 
+### Add product to cart
 
+POST https://localhost/wp-json/wc/store/cart/add-item
+Content-Type: application/json
+Authorization: Basic Y2tfNDE3YzU5NzJkMmRkN2Y1ZTk3MmY2ODA0MTA5NDllMTk5M2IzMmVhZjpjc18wYWM5MDYwODY5OGU5MDMzZDYyMDg1MzI5ZTY4ZjY4YmE4YWE5MjBl
+{
+  "id": 1,
+  "quantity": 1
+}
+
+### Get cart contents
+
+GET https://localhost/wp-json/wc/store/cart
+Content-Type: application/json
+Authorization: Basic Y2tfNDE3YzU5NzJkMmRkN2Y1ZTk3MmY2ODA0MTA5NDllMTk5M2IzMmVhZjpjc18wYWM5MDYwODY5OGU5MDMzZDYyMDg1MzI5ZTY4ZjY4YmE4YWE5MjBl
+
+### Create an order
+POST https://localhost/wp-json/wc/v3/orders
+Content-Type: application/json
+Authorization: Basic Y2tfNDE3YzU5NzJkMmRkN2Y1ZTk3MmY2ODA0MTA5NDllMTk5M2IzMmVhZjpjc18wYWM5MDYwODY5OGU5MDMzZDYyMDg1MzI5ZTY4ZjY4YmE4YWE5MjBl
+{
+  "payment_method": "bacs",
+  "payment_method_title": "Direct Bank Transfer",
+  "set_paid": true,
+  "billing": {
+    "first_name": "John",
+    "last_name": "Doe",
+    "address_1": "123 Main St",
+    "address_2": "",
+    "city": "Anytown",
+    "state": "CA",
+    "postcode": "12345",
+    "country": "US",
+    "email": "john.doe@example.com",
+    "phone": "555-555-5555"
+  },
+  "shipping": {
+    "first_name": "John",
+    "last_name": "Doe",
+    "address_1": "123 Main St",
+    "address_2": "",
+    "city": "Anytown",
+    "state": "CA",
+    "postcode": "12345",
+    "country": "US"
+  },
+  "line_items": [
+    {
+      "product_id": 1,
+      "quantity": 1
+    }
+  ],
+    "shipping_lines": [
+    {
+      "method_id": "flat_rate",
+      "method_title": "Flat Rate",
+      "total": "10.00"
+    }
+  ]
+}
