@@ -1,76 +1,61 @@
 
-# consumer_key=ck_417c5972d2dd7f5e972f680410949e1993b32eaf
-# consumer_secret=cs_0ac90608698e9033d62085329e68f68ba8aa920e
-# ?consumer_key=ck_417c5972d2dd7f5e972f680410949e1993b32eaf&consumer_secret=cs_0ac90608698e9033d62085329e68f68ba8aa920e
-# base64 encoded key Y2tfNDE3YzU5NzJkMmRkN2Y1ZTk3MmY2ODA0MTA5NDllMTk5M2IzMmVhZjpjc18wYWM5MDYwODY5OGU5MDMzZDYyMDg1MzI5ZTY4ZjY4YmE4YWE5MjBl
+# consumer_key=ck_e1c2f9609a4e4c5f4ea86dc821fb638869ff784c
+# consumer_secret=cs_a0b743123b8054fc7efb92adcb37a5efbeab6a81
+
+# base64 encoded key Y2tfZTFjMmY5NjA5YTRlNGM1ZjRlYTg2ZGM4MjFmYjYzODg2OWZmNzg0Yzpjc19hMGI3NDMxMjNiODA1NGZjN2VmYjkyYWRjYjM3YTVlZmJlYWI2YTgx
 
 ### Get all products
 
 GET https://localhost/wp-json/wc/v3/products
 Content-Type: application/json
-Authorization: Basic Y2tfNDE3YzU5NzJkMmRkN2Y1ZTk3MmY2ODA0MTA5NDllMTk5M2IzMmVhZjpjc18wYWM5MDYwODY5OGU5MDMzZDYyMDg1MzI5ZTY4ZjY4YmE4YWE5MjBl
+Authorization: Basic Y2tfZTFjMmY5NjA5YTRlNGM1ZjRlYTg2ZGM4MjFmYjYzODg2OWZmNzg0Yzpjc19hMGI3NDMxMjNiODA1NGZjN2VmYjkyYWRjYjM3YTVlZmJlYWI2YTgx
 
-### Get all products with query parameters
+### Order a product
 
-GET https://localhost/wp-json/wc/v3/products?consumer_key=ck_417c5972d2dd7f5e972f680410949e1993b32eaf&consumer_secret=cs_0ac90608698e9033d62085329e68f68ba8aa920e
-
-### Add product to cart
-
-POST https://localhost/wp-json/wc/store/cart/add-item
+POST /wp-json/wc/v3/orders
 Content-Type: application/json
-Authorization: Basic Y2tfNDE3YzU5NzJkMmRkN2Y1ZTk3MmY2ODA0MTA5NDllMTk5M2IzMmVhZjpjc18wYWM5MDYwODY5OGU5MDMzZDYyMDg1MzI5ZTY4ZjY4YmE4YWE5MjBl
+Authorization: Basic Y2tfZTFjMmY5NjA5YTRlNGM1ZjRlYTg2ZGM4MjFmYjYzODg2OWZmNzg0Yzpjc19hMGI3NDMxMjNiODA1NGZjN2VmYjkyYWRjYjM3YTVlZmJlYWI2YTgx
+
 {
-  "id": 1,
-  "quantity": 1
-}
-
-### Get cart contents
-
-GET https://localhost/wp-json/wc/store/cart
-Content-Type: application/json
-Authorization: Basic Y2tfNDE3YzU5NzJkMmRkN2Y1ZTk3MmY2ODA0MTA5NDllMTk5M2IzMmVhZjpjc18wYWM5MDYwODY5OGU5MDMzZDYyMDg1MzI5ZTY4ZjY4YmE4YWE5MjBl
-
-### Create an order
-POST https://localhost/wp-json/wc/v3/orders
-Content-Type: application/json
-Authorization: Basic Y2tfNDE3YzU5NzJkMmRkN2Y1ZTk3MmY2ODA0MTA5NDllMTk5M2IzMmVhZjpjc18wYWM5MDYwODY5OGU5MDMzZDYyMDg1MzI5ZTY4ZjY4YmE4YWE5MjBl
-{
-  "payment_method": "bacs",
-  "payment_method_title": "Direct Bank Transfer",
-  "set_paid": true,
-  "billing": {
-    "first_name": "John",
-    "last_name": "Doe",
-    "address_1": "123 Main St",
-    "address_2": "",
-    "city": "Anytown",
-    "state": "CA",
-    "postcode": "12345",
-    "country": "US",
-    "email": "john.doe@example.com",
-    "phone": "555-555-5555"
-  },
-  "shipping": {
-    "first_name": "John",
-    "last_name": "Doe",
-    "address_1": "123 Main St",
-    "address_2": "",
-    "city": "Anytown",
-    "state": "CA",
-    "postcode": "12345",
-    "country": "US"
-  },
   "line_items": [
-    {
-      "product_id": 1,
-      "quantity": 1
-    }
-  ],
-    "shipping_lines": [
-    {
-      "method_id": "flat_rate",
-      "method_title": "Flat Rate",
-      "total": "10.00"
-    }
+    { "product_id": 26, "quantity": 1 }
   ]
 }
+
+### Update order
+
+PUT /wp-json/wc/v3/orders/33
+Content-Type: application/json
+Authorization: Basic Y2tfZTFjMmY5NjA5YTRlNGM1ZjRlYTg2ZGM4MjFmYjYzODg2OWZmNzg0Yzpjc19hMGI3NDMxMjNiODA1NGZjN2VmYjkyYWRjYjM3YTVlZmJlYWI2YTgx
+
+{
+  "line_items": [
+    { "product_id": 26, "quantity": 2 }
+  ]
+}
+
+### Get single product
+
+GET https://localhost/wp-json/wc/v3/products/26
+Content-Type: application/json
+Authorization: Basic Y2tfZTFjMmY5NjA5YTRlNGM1ZjRlYTg2ZGM4MjFmYjYzODg2OWZmNzg0Yzpjc19hMGI3NDMxMjNiODA1NGZjN2VmYjkyYWRjYjM3YTVlZmJlYWI2YTgx
+
+### Add product to order
+
+POST https://localhost/wp-json/wc/v3/orders
+Content-Type: application/json
+Authorization: Basic Y2tfZTFjMmY5NjA5YTRlNGM1ZjRlYTg2ZGM4MjFmYjYzODg2OWZmNzg0Yzpjc19hMGI3NDMxMjNiODA1NGZjN2VmYjkyYWRjYjM3YTVlZmJlYWI2YTgx
+
+{
+  "line_items": [
+    { "product_id": 26, "quantity": 1 }
+  ]
+}
+
+### Get orders 
+# Cart does not exist in WooCommerce REST API, so we use orders instead. 
+# Orders are sensitive, so WooCommerce requires a valid consumer key/secret with permissions.
+
+GET https://localhost/wp-json/wc/v3/orders
+Content-Type: application/json
+Authorization: Basic Y2tfZTFjMmY5NjA5YTRlNGM1ZjRlYTg2ZGM4MjFmYjYzODg2OWZmNzg0Yzpjc19hMGI3NDMxMjNiODA1NGZjN2VmYjkyYWRjYjM3YTVlZmJlYWI2YTgx
