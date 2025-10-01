@@ -1,14 +1,23 @@
 FROM wordpress
 
-# apt-get update && apt-get install -y ssl-cert = Update package lists and install ssl-cert package
-# a2enmod ssl = Enable the SSL module
-# a2ensite default-ssl = Enable the default SSL site
-# rm -rf /var/lib/apt/lists/* = Clean up apt cache to reduce image size
+# It's weird because running as root is running as your user
+USER root
+
+# enable apache module rewrite
+RUN a2enmod rewrite
+
+# enable ssl module with fake certificate
 RUN apt-get update && apt-get install -y ssl-cert \
     && a2enmod ssl \
-    && a2ensite default-ssl \ 
-    && rm -rf /var/lib/apt/lists/* 
+    && a2ensite default-ssl \
+    && rm -rf /var/lib/apt/lists/*
 
 
-# Set the working directory inside the container
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+#RUN docker-php-ext-enable xdebug
+
+COPY ./php.ini /usr/local/etc/php/
+
+# Set working directory - Is this needed?
 WORKDIR /var/www/html
